@@ -14,6 +14,7 @@ class QuizResource extends JsonResource
      */
     public function toArray($request)
     {
+
         return [
             'type' => $this->type,
             'text' => $this->question,
@@ -31,8 +32,8 @@ class QuizResource extends JsonResource
                     'answer'=>$this->option4
                 ],
             ],
-            'selected' => null,
-            'answer'=>$this->answer,
+            'selected' => [],
+            'answer'=>($this->type=='text')?[(int)$this->answer]:array_map('intval', explode(',', $this->answer)),
             'correct'=>null,
         ];
     }
